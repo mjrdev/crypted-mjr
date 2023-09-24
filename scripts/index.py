@@ -1,3 +1,4 @@
+import sys
 from cryptography.fernet import Fernet
 
 # Function to generate an encryption key
@@ -18,12 +19,17 @@ def decrypt(key, encrypted_text):
     decrypted_text = text_bytes.decode('utf-8')
     return decrypted_text
 
-# Example usage
-key = generate_key()
-original_text = "This is a secret message."
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python script.py 'text_to_encrypt'")
+        sys.exit(1)
 
-encrypted_text = encrypt(key, original_text)
-print("Encrypted text:", encrypted_text)
+    key = b'tpppRgl6_Os2-NqrGqEeG3QC2agmQHuVIJVpyz0M6sg='
+    original_text = sys.argv[1]
 
-decrypted_text = decrypt(key, encrypted_text)
-print("Decrypted text:", decrypted_text)
+    encrypted_text = encrypt(key, original_text)
+    print("Encrypted text:", encrypted_text)
+
+    decrypted_text = decrypt(key, encrypted_text)
+    print("Decrypted text:", decrypted_text)
+    print("Your key:", key)

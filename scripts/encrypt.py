@@ -9,12 +9,12 @@ def encrypt(key, text):
     return encrypted_text
 
 if __name__ == "__main__":
-    # if len(sys.argv) != 3:
-    #     print("Usage: python encrypt.py 'text_to_encrypt'")
-    #     sys.exit(1)
+    if len(sys.argv) != 3:
+        print("Usage: python encrypt.py 'text_to_encrypt'")
+        sys.exit(1)
 
-    key = sys.argv[1]
-    original_text = sys.argv[2]
+    text = sys.argv[1]
+    key = sys.argv[2].encode('utf-8')
 
-    encrypted_text = encrypt(key, original_text)
+    encrypted_text = encrypt(key, text)
     print("Encrypted text:", encrypted_text)

@@ -1,35 +1,30 @@
-import sys
-from cryptography.fernet import Fernet
+import tkinter as tk
 
-# Function to generate an encryption key
-def generate_key():
-    return Fernet.generate_key()
+def on_button_click():
+    user_input = entry.get()
+    result_label.config(text="Olá, " + user_input + "!")
 
-# Function to encrypt a string based on a key
-def encrypt(key, text):
-    cipher_suite = Fernet(key)
-    text_bytes = text.encode('utf-8')
-    encrypted_text = cipher_suite.encrypt(text_bytes)
-    return encrypted_text
+def input(root: tk):
+    texEncrypted = tk.Label(root, text="Digite seu texto encriptado: ")
+    texEncrypted.pack()
 
-# Function to decrypt a string based on a key
-def decrypt(key, encrypted_text):
-    cipher_suite = Fernet(key)
-    text_bytes = cipher_suite.decrypt(encrypted_text)
-    decrypted_text = text_bytes.decode('utf-8')
-    return decrypted_text
+    entry = tk.Entry(root)
+    entry.pack()
 
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python script.py 'text_to_encrypt'")
-        sys.exit(1)
+root = tk.Tk()
+root.geometry("600x400")
+root.title("Encriptador")
 
-    key = b'tpppRgl6_Os2-NqrGqEeG3QC2agmQHuVIJVpyz0M6sg='
-    original_text = sys.argv[1]
+input(root)
+input(root)
 
-    encrypted_text = encrypt(key, original_text)
-    print("Encrypted text:", encrypted_text)
+# Cria um botão
+button = tk.Button(root, text="Revelar", command=on_button_click)
+button.pack()
 
-    decrypted_text = decrypt(key, encrypted_text)
-    print("Decrypted text:", decrypted_text)
-    print("Your key:", key)
+# Cria um rótulo para exibir o resultado
+result_label = tk.Label(root, text="")
+result_label.pack()
+
+# Inicia a interface gráfica
+root.mainloop()
